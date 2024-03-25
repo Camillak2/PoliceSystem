@@ -11,8 +11,8 @@ namespace PoliceSystem.Automation
     {
         public bool Login(string login, string password)
         {
-            string login = LoginTB.Text.Trim();
-            string password = PasswordTB.Password.Trim();
+            login = LoginTB.Text.Trim();
+            password = PasswordTB.Password.Trim();
 
             users = new List<User>(DBConnection.police_System.User.ToList());
             var currentUser = users.FirstOrDefault(i => i.Login.Trim() == login && i.Password.Trim() == password);
