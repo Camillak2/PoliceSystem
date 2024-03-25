@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PoliceSystem.Pages;
 
 namespace PoliceSystem
 {
@@ -23,6 +24,7 @@ namespace PoliceSystem
         public MainWindow()
         {
             InitializeComponent();
+            NaFr.NavigationService.Navigate(new AuthorizationPage());
         }
     }
 }

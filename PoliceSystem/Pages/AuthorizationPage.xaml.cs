@@ -61,6 +61,5 @@ namespace PoliceSystem.Pages
                 MessageBox.Show("Возникла ошибка");
             }
         }
-
     }
 }

@@ -64,6 +64,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Windowsss\AddComplaintWindow.xaml.cs">
+      <DependentUpon>AddComplaintWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windowsss\EditComplaint.xaml.cs">
+      <DependentUpon>EditComplaint.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -72,7 +78,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Automation\AuthorizationClass.cs" />
     <Compile Include="DB\Alibi.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -115,6 +120,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ComplaintsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\MainMenuCivilianPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -127,10 +136,21 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windowsss\AddComplaintWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windowsss\EditComplaint.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Pages\AuthorizationPage.xaml.cs">
       <DependentUpon>AuthorizationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ComplaintsPage.xaml.cs">
+      <DependentUpon>ComplaintsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainMenuCivilianPage.xaml.cs">
       <DependentUpon>MainMenuCivilianPage.xaml</DependentUpon>
@@ -175,6 +195,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Automation\" />
     <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>

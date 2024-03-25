@@ -12,5 +12,20 @@ namespace PoliceSystem.DB
 
         public static User loginedUser;
 
+
+        public static Сomplaint selectedForEditComplaint;
+
+        //public static Animal selectedForEditAnimal;
+
+        //public static Taskk selectedForEditTask;
+
+        //public static Applicationn selectedForEditApplication;
+
+        //public static Timetable selectedForEditTimetable;
+
+        //public static TimetableForAnimal selectedForEditTimetableForAnimal;
+
+        //public static Perfomance currentPerfomance;
+
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PoliceSystem.DB;
 
 namespace PoliceSystem.Pages
 {
@@ -20,14 +21,20 @@ namespace PoliceSystem.Pages
     /// </summary>
     public partial class MainMenuCivilianPage : Page
     {
+        public static List<User> users { get; set; }
+        public static User loggedUser;
+
         public MainMenuCivilianPage()
         {
             InitializeComponent();
+            loggedUser = DBConnection.loginedUser;
+            UserTB.Text = loggedUser.FirstName.ToString() + " " + loggedUser.LastName.ToString();
+            LoginTB.Text = DBConnection.loginedUser.Login;
         }
 
         private void ComplaintBTN_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new ComplaintsPage());
         }
 
         private void BackBTN_Click(object sender, RoutedEventArgs e)
