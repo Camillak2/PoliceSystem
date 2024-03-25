@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PoliceSystem.DB;
 
 namespace PoliceSystem.Pages
 {
@@ -34,25 +35,21 @@ namespace PoliceSystem.Pages
                 string login = LoginTB.Text.Trim();
                 string password = PasswordTB.Password.Trim();
 
-                users = new List<User>(DBConnection.circusDB.User.ToList());
+                users = new List<User>(DBConnection.police_System.User.ToList());
                 var currentUser = users.FirstOrDefault(i => i.Login.Trim() == login && i.Password.Trim() == password);
-                DBConnection.loginedWorker = currentWorker;
+                DBConnection.loginedUser = currentUser;
 
-                if (currentWorker != null && currentWorker.ID_Position == 1)
+                if (currentUser != null && currentUser.Role.Name == "Полицейский")
                 {
-                    NavigationService.Navigate(new MainMenuPageForAdmin());
+                    NavigationService.Navigate(new MainMenuPolicePage());
                 }
-                else if (currentWorker != null && currentWorker.ID_Position == 2)
+                else if (currentUser != null && currentUser.Role.Name == "Мирный житель")
                 {
-                    NavigationService.Navigate(new MainMenuPageForArtist());
+                    NavigationService.Navigate(new MainMenuCivilianPage());
                 }
-                else if (currentWorker != null && currentWorker.ID_Position == 3)
+                else if (currentUser != null && currentUser.Role.Name == "Преступник")
                 {
-                    NavigationService.Navigate(new MainMenuPageForTrainer());
-                }
-                else if (currentWorker != null && currentWorker.ID_Position == 4)
-                {
-                    NavigationService.Navigate(new MainMenuPageForServiceStaff());
+                    NavigationService.Navigate(new MainMenuCriminalPage());
                 }
                 else
                 {
