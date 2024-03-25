@@ -20,9 +20,50 @@ namespace PoliceSystem.Pages
     /// </summary>
     public partial class AuthorizationPage : Page
     {
+        public static List<User> users { get; set; }
+
         public AuthorizationPage()
         {
             InitializeComponent();
         }
+
+        private void EnterBTN_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string login = LoginTB.Text.Trim();
+                string password = PasswordTB.Password.Trim();
+
+                users = new List<User>(DBConnection.circusDB.Worker.ToList());
+                var currentWorker = workers.FirstOrDefault(i => i.Login.Trim() == login && i.Password.Trim() == password);
+                DBConnection.loginedWorker = currentWorker;
+
+                if (currentWorker != null && currentWorker.ID_Position == 1)
+                {
+                    NavigationService.Navigate(new MainMenuPageForAdmin());
+                }
+                else if (currentWorker != null && currentWorker.ID_Position == 2)
+                {
+                    NavigationService.Navigate(new MainMenuPageForArtist());
+                }
+                else if (currentWorker != null && currentWorker.ID_Position == 3)
+                {
+                    NavigationService.Navigate(new MainMenuPageForTrainer());
+                }
+                else if (currentWorker != null && currentWorker.ID_Position == 4)
+                {
+                    NavigationService.Navigate(new MainMenuPageForServiceStaff());
+                }
+                else
+                {
+                    MessageBox.Show("Неверный логин или пароль. Попробуйте снова.");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Возникла ошибка");
+            }
+        }
+
     }
 }
