@@ -24,5 +24,15 @@ namespace PoliceSystem.Pages
         {
             InitializeComponent();
         }
+
+        private void ComplaintBTN_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BackBTN_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AuthorizationPage());
+        }
     }
 }

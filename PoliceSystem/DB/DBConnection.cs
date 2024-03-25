@@ -8,7 +8,9 @@ namespace PoliceSystem.DB
 {
     internal class DBConnection
     {
+        public static Police_SystemEntities police_System = new Police_SystemEntities();
 
+        public static User loginedUser;
 
     }
 }

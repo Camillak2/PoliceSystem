@@ -1,0 +1,461 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Police_System2Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Alibi">
+          <Key>
+            <PropertyRef Name="Alibi_id" />
+          </Key>
+          <Property Name="Alibi_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="500" />
+          <Property Name="User_id" Type="int" />
+          <Property Name="Complaint_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id_Role" />
+          </Key>
+          <Property Name="Id_Role" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Statistics">
+          <Key>
+            <PropertyRef Name="Id_statistics" />
+          </Key>
+          <Property Name="Id_statistics" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_id" Type="int" />
+          <Property Name="Count" Type="int" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Status_id" />
+          </Key>
+          <Property Name="Status_id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="User_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_of_birth" Type="date" />
+          <Property Name="Id_role" Type="int" />
+          <Property Name="Login" Type="nvarchar" MaxLength="30" />
+          <Property Name="Password" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Сomplaint">
+          <Key>
+            <PropertyRef Name="Compaint_id" />
+          </Key>
+          <Property Name="Compaint_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="500" />
+          <Property Name="User_id" Type="int" />
+          <Property Name="Criminal_id" Type="int" />
+          <Property Name="Status_id" Type="int" />
+        </EntityType>
+        <Association Name="FK_Alibi_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Alibi" Type="Self.Alibi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Alibi">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Alibi_Сomplaint">
+          <End Role="Сomplaint" Type="Self.Сomplaint" Multiplicity="0..1" />
+          <End Role="Alibi" Type="Self.Alibi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сomplaint">
+              <PropertyRef Name="Compaint_id" />
+            </Principal>
+            <Dependent Role="Alibi">
+              <PropertyRef Name="Complaint_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Statistics_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Statistics" Type="Self.Statistics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Statistics">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id_Role" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Сomplaint_Status1">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="Сomplaint" Type="Self.Сomplaint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Status_id" />
+            </Principal>
+            <Dependent Role="Сomplaint">
+              <PropertyRef Name="Status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Сomplaint_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Сomplaint" Type="Self.Сomplaint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Сomplaint">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Сomplaint_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Сomplaint" Type="Self.Сomplaint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Сomplaint">
+              <PropertyRef Name="Criminal_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Police_System2ModelContainer">
+          <EntitySet Name="Alibi" EntityType="Self.Alibi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statistics" EntityType="Self.Statistics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Сomplaint" EntityType="Self.Сomplaint" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Alibi_User" Association="Self.FK_Alibi_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Alibi" EntitySet="Alibi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Alibi_Сomplaint" Association="Self.FK_Alibi_Сomplaint">
+            <End Role="Сomplaint" EntitySet="Сomplaint" />
+            <End Role="Alibi" EntitySet="Alibi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Statistics_User" Association="Self.FK_Statistics_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Statistics" EntitySet="Statistics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Сomplaint_Status1" Association="Self.FK_Сomplaint_Status1">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Сomplaint" EntitySet="Сomplaint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Сomplaint_User" Association="Self.FK_Сomplaint_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Сomplaint" EntitySet="Сomplaint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Сomplaint_User1" Association="Self.FK_Сomplaint_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Сomplaint" EntitySet="Сomplaint" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Police_System2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Alibi">
+          <Key>
+            <PropertyRef Name="Alibi_id" />
+          </Key>
+          <Property Name="Alibi_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="User_id" Type="Int32" />
+          <Property Name="Complaint_id" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Alibi_User" FromRole="Alibi" ToRole="User" />
+          <NavigationProperty Name="Сomplaint" Relationship="Self.FK_Alibi_Сomplaint" FromRole="Alibi" ToRole="Сomplaint" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id_Role" />
+          </Key>
+          <Property Name="Id_Role" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Statistics">
+          <Key>
+            <PropertyRef Name="Id_statistics" />
+          </Key>
+          <Property Name="Id_statistics" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_id" Type="Int32" />
+          <Property Name="Count" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Statistics_User" FromRole="Statistics" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Status_id" />
+          </Key>
+          <Property Name="Status_id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Сomplaint" Relationship="Self.FK_Сomplaint_Status1" FromRole="Status" ToRole="Сomplaint" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="User_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_of_birth" Type="DateTime" Precision="0" />
+          <Property Name="Id_role" Type="Int32" />
+          <Property Name="Login" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Alibi" Relationship="Self.FK_Alibi_User" FromRole="User" ToRole="Alibi" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Statistics" Relationship="Self.FK_Statistics_User" FromRole="User" ToRole="Statistics" />
+          <NavigationProperty Name="Сomplaint" Relationship="Self.FK_Сomplaint_User" FromRole="User" ToRole="Сomplaint" />
+          <NavigationProperty Name="Сomplaint1" Relationship="Self.FK_Сomplaint_User1" FromRole="User" ToRole="Сomplaint" />
+        </EntityType>
+        <EntityType Name="Сomplaint">
+          <Key>
+            <PropertyRef Name="Compaint_id" />
+          </Key>
+          <Property Name="Compaint_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="User_id" Type="Int32" />
+          <Property Name="Criminal_id" Type="Int32" />
+          <Property Name="Status_id" Type="Int32" />
+          <NavigationProperty Name="Alibi" Relationship="Self.FK_Alibi_Сomplaint" FromRole="Сomplaint" ToRole="Alibi" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Сomplaint_Status1" FromRole="Сomplaint" ToRole="Status" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Сomplaint_User" FromRole="Сomplaint" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_Сomplaint_User1" FromRole="Сomplaint" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Alibi_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Alibi" Type="Self.Alibi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Alibi">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Alibi_Сomplaint">
+          <End Role="Сomplaint" Type="Self.Сomplaint" Multiplicity="0..1" />
+          <End Role="Alibi" Type="Self.Alibi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сomplaint">
+              <PropertyRef Name="Compaint_id" />
+            </Principal>
+            <Dependent Role="Alibi">
+              <PropertyRef Name="Complaint_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id_Role" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Statistics_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Statistics" Type="Self.Statistics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Statistics">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Сomplaint_Status1">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="Сomplaint" Type="Self.Сomplaint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Status_id" />
+            </Principal>
+            <Dependent Role="Сomplaint">
+              <PropertyRef Name="Status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Сomplaint_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Сomplaint" Type="Self.Сomplaint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Сomplaint">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Сomplaint_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Сomplaint" Type="Self.Сomplaint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Сomplaint">
+              <PropertyRef Name="Criminal_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Police_SystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alibi" EntityType="Self.Alibi" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Statistics" EntityType="Self.Statistics" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="Сomplaint" EntityType="Self.Сomplaint" />
+          <AssociationSet Name="FK_Alibi_User" Association="Self.FK_Alibi_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Alibi" EntitySet="Alibi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Alibi_Сomplaint" Association="Self.FK_Alibi_Сomplaint">
+            <End Role="Сomplaint" EntitySet="Сomplaint" />
+            <End Role="Alibi" EntitySet="Alibi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Statistics_User" Association="Self.FK_Statistics_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Statistics" EntitySet="Statistics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Сomplaint_Status1" Association="Self.FK_Сomplaint_Status1">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Сomplaint" EntitySet="Сomplaint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Сomplaint_User" Association="Self.FK_Сomplaint_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Сomplaint" EntitySet="Сomplaint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Сomplaint_User1" Association="Self.FK_Сomplaint_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Сomplaint" EntitySet="Сomplaint" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Police_System2ModelContainer" CdmEntityContainer="Police_SystemEntities">
+          <EntitySetMapping Name="Alibi">
+            <EntityTypeMapping TypeName="Police_System2Model.Alibi">
+              <MappingFragment StoreEntitySet="Alibi">
+                <ScalarProperty Name="Alibi_id" ColumnName="Alibi_id" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="Complaint_id" ColumnName="Complaint_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="Police_System2Model.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id_Role" ColumnName="Id_Role" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statistics">
+            <EntityTypeMapping TypeName="Police_System2Model.Statistics">
+              <MappingFragment StoreEntitySet="Statistics">
+                <ScalarProperty Name="Id_statistics" ColumnName="Id_statistics" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="Police_System2Model.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="Status_id" ColumnName="Status_id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="Police_System2Model.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Date_of_birth" ColumnName="Date_of_birth" />
+                <ScalarProperty Name="Id_role" ColumnName="Id_role" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Сomplaint">
+            <EntityTypeMapping TypeName="Police_System2Model.Сomplaint">
+              <MappingFragment StoreEntitySet="Сomplaint">
+                <ScalarProperty Name="Compaint_id" ColumnName="Compaint_id" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="Criminal_id" ColumnName="Criminal_id" />
+                <ScalarProperty Name="Status_id" ColumnName="Status_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
