@@ -34,8 +34,8 @@ namespace PoliceSystem.Pages
                 string login = LoginTB.Text.Trim();
                 string password = PasswordTB.Password.Trim();
 
-                users = new List<User>(DBConnection.circusDB.Worker.ToList());
-                var currentWorker = workers.FirstOrDefault(i => i.Login.Trim() == login && i.Password.Trim() == password);
+                users = new List<User>(DBConnection.circusDB.User.ToList());
+                var currentUser = users.FirstOrDefault(i => i.Login.Trim() == login && i.Password.Trim() == password);
                 DBConnection.loginedWorker = currentWorker;
 
                 if (currentWorker != null && currentWorker.ID_Position == 1)
